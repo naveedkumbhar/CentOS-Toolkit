@@ -37,3 +37,5 @@ bantime  = 600
 
 EOF
 
+sed -i -e s,beautifier\.setInputCmd\(c\),'time.sleep\(0\.1\)\n\t\t\tbeautifier.setInputCmd\(c\)', /usr/bin/fail2ban-client
+
