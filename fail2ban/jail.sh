@@ -1,3 +1,4 @@
+cat << "EOF" >> /etc/fail2ban/jail.conf
 [freeswitch-tcp]
 enabled  = true
 port     = 5060,5061,5080,5081
@@ -33,4 +34,6 @@ action   = iptables-allports[name=freeswitch-dos, protocol=all]
 maxretry = 5
 findtime = 600
 bantime  = 600
+
+EOF
 
