@@ -1,0 +1,22 @@
+ check process FreeSWITCH with pidfile /usr/local/freeswitch/run/freeswitch.pid
+  start program = "/usr/local/freeswitch/bin/./freeswitch -nc -rp"
+	stop program  = "/usr/local/freeswitch/bin/./freeswitch -stop"	
+    if failed port 5060 type UDP then restart
+    if 5 restarts within 5 cycles then timeout
+	if cpu > 60% for 2 cycles then alert
+	if cpu > 80% for 5 cycles then alert
+	if totalmem > 2000.0 MB for 5 cycles then restart
+	if children > 2500 then restart 
+    depends on freeswitch_bin
+    depends on freeswitch_rc
+
+ check file freeswitch_bin with path /usr/local/freeswitch/bin/freeswitch
+   if failed checksum then unmonitor
+   if failed permission 755 then unmonitor
+   if failed uid freeswitch then unmonitor
+
+ check file freeswitch_rc with path /etc/init.d/freeswitch
+   if failed checksum then unmonitor
+   if failed permission 755 then unmonitor
+   if failed uid root then unmonitor
+   if failed gid root then unmonitor
