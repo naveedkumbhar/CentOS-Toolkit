@@ -75,7 +75,7 @@ iptables -t mangle -A OUTPUT -p tcp --sport 5060 -j DSCP --set-dscp-class cs3
 iptables -t mangle -A OUTPUT -p tcp --sport 5061 -j DSCP --set-dscp-class cs3 
 
 # mark RTP packets with EF
-iptables -t mangle -A OUTPUT -p udp -m udp --sport ${RTP_PORTS} -j DSCP --set-dscp-class ef 
+iptables -t mangle -A OUTPUT -p udp -m udp --sport 16384:32767 -j DSCP --set-dscp-class ef 
 
 ## // Reject dos attacks for FreeSWITCH ########################################################################
 
