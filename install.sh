@@ -22,21 +22,18 @@ ARCH=$(uname -p)
 WWWROOT="/var/www/html"
 HOSTNAME=`hostname`
 SERVER_IP=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
-WGET="wget -t 3 --no-check-certificate"
-CURL="curl -s"
 LOG_FILE="/tmp/_install-$DATETIME.log"
 
 clear
 echo -e "\n*** This script will install CentOS-Toolkit. Press Enter ***"
 read -n 1 -p "Press any key to continue ... "
 clear
-wget -t 3 --no-check-certificate https://raw.github.com/mehulsbhatt/CentOS-Toolkit/master/functions.sh 
-wget -t 3 --no-check-certificate https://raw.github.com/mehulsbhatt/CentOS-Toolkit/master/functions.sh 
+cd /tmp && git clone https://github.com/mehulsbhatt/CentOS-Toolkit.git
 
 DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$DIR" ]]; then DIR="$PWD"; fi
-. "$DIR/functions.sh"
-. "$DIR/common.sh"
+. "$DIR/CentOS-Toolkit/functions.sh"
+. "$DIR/CentOS-Toolkit/common.sh"
 
 get_os_architecture
 get_linux_distribution
